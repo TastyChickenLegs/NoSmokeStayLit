@@ -10,7 +10,7 @@ using ServerSyncModTemplate;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany(NoSmokeStayLit.NoSmokeStayLit.Author)]
 [assembly: AssemblyProduct(NoSmokeStayLit.NoSmokeStayLit.ModName)]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

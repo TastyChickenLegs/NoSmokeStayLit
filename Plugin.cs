@@ -1,14 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using ServerSync;
+using System;
+using System.IO;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace NoSmokeStayLit
 {
@@ -17,33 +15,36 @@ namespace NoSmokeStayLit
     {
         private readonly Harmony harmony = new Harmony("tastychickenlegs.NoSmokeStayLit");
         internal const string ModName = "NoSmokeStayLit";
-        internal const string ModVersion = "1.1.1";
+        internal const string ModVersion = "1.1.5";
         internal const string Author = "tastychickenlegs";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
         private static string ConfigFileFullPath = Paths.ConfigPath + Path.DirectorySeparatorChar + ConfigFileName;
-
         internal static string ConnectionError = "";
-
+        public static bool configVerifyClient => _configVerifyClient.Value;
         private readonly Harmony _harmony = new(ModGUID);
 
         public static readonly ManualLogSource ServerSyncModTemplateLogger =
             BepInEx.Logging.Logger.CreateLogSource(ModName);
 
         private static readonly ConfigSync ConfigSync = new(ModGUID)
-            { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion };
+        { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion };
 
         public enum Toggle
         {
             On = 1,
             Off = 0
         }
+
         private static string[] affectedSources = new string[]
         {
+            "piece_brazierfloor01",
+            "piece_brazierceiling01",
             "fire_pit",
             "hearth",
             "bonfire"
         };
+
         public void Awake()
         {
             _serverConfigLocked = config("1 - General", "Lock Configuration", Toggle.On,
@@ -55,10 +56,11 @@ namespace NoSmokeStayLit
             if (_configEnabled.Value)
             {
                 _configNexusID = config("General", "NexusID", 2027, "Nexus mod ID for 'Nexus Update Check' mod compatibility.");
+                _configVerifyClient = config("General", "Verify Clients", false, "Enable this to turn on the client verification and version checks.");
                 _configNoFuelNeeded = config("Fuel", "NoFuelNeeded", true, "If true, will keep fire lit and not require fuel)");
                 _configAffectedSources = config("General", "AffectedFireplaceSources", string.Join(",", affectedSources), "List of 'Fireplace' sources to be affected by the mod. By default firepit and hearth are turned on.");
                 affectedSources = _configAffectedSources.Value.Split(',');
-           
+                _configStackSmelters = config("General", "Stack Smelters", true, "Removes most of the smoke and the blocking check so smelters and kilns can be stacked.");
             }
 
             _harmony.PatchAll();
@@ -97,7 +99,6 @@ namespace NoSmokeStayLit
             }
         }
 
-       
         #region ConfigOptions
 
         private static ConfigEntry<Toggle> _serverConfigLocked = null!;
@@ -105,6 +106,8 @@ namespace NoSmokeStayLit
         private static ConfigEntry<bool> _configEnabled;
         private static ConfigEntry<string> _configAffectedSources;
         private static ConfigEntry<bool> _configNoFuelNeeded;
+        private static ConfigEntry<bool> _configStackSmelters;
+        private static ConfigEntry<bool> _configVerifyClient;
 
         private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description,
             bool synchronizedSetting = true)
@@ -133,59 +136,57 @@ namespace NoSmokeStayLit
         {
             public bool? Browsable = false;
         }
-        
-        class AcceptableShortcuts : AcceptableValueBase
+
+        private class AcceptableShortcuts : AcceptableValueBase
         {
             public AcceptableShortcuts() : base(typeof(KeyboardShortcut))
             {
             }
 
             public override object Clamp(object value) => value;
+
             public override bool IsValid(object value) => true;
 
             public override string ToDescriptionString() =>
                 "# Acceptable values: " + string.Join(", ", KeyboardShortcut.AllKeyCodes);
         }
 
-        #endregion
+        #endregion ConfigOptions
 
         //checks to see if items use fuel and configures the interface accordingly
         [HarmonyPatch(typeof(Fireplace), nameof(Fireplace.GetHoverText))]
-        class FireplaceGetHoverText_Patch
+        private class FireplaceGetHoverText_Patch
         {
-            static void Postfix(Fireplace __instance, ref string __result, ref ZNetView ___m_nview, ref string ___m_name)
+            private static void Postfix(Fireplace __instance, ref string __result, ref ZNetView ___m_nview, ref string ___m_name)
             {
                 if (affectedSources.Contains(Utils.GetPrefabName(__instance.gameObject)))
                 {
                     if (_configNoFuelNeeded.Value)
 
                     {
-                        __result = Localization.instance.Localize(___m_name + "\n <color=yellow>No Fuel Required</color>" + "\n[<color=yellow><b>1-8</b></color>] Use Item");
+                        __result = Localization.instance.Localize(___m_name + "\n <color=yellow>No Fuel Required</color>" + "\n NoSmoke StayLit");
                     }
                 }
             }
         }
-        [HarmonyPatch(typeof(Fireplace), nameof(Fireplace.Interact))]
-        class FireplaceInteract_Patch
-        {
-            static bool Prefix(Fireplace __instance, ref bool __result)
-            {
 
+        [HarmonyPatch(typeof(Fireplace), nameof(Fireplace.Interact))]
+        private class FireplaceInteract_Patch
+        {
+            private static bool Prefix(Fireplace __instance, ref bool __result)
+            {
                 if (affectedSources.Contains(Utils.GetPrefabName(__instance.gameObject)))
                 {
                     if (_configNoFuelNeeded.Value)
                     {
                         __result = false;
                         return false;
-                        
                     }
                     else
                     {
                         __result = true;
                         return true;
                     }
-                   
-          
                 }
                 __result = true;
                 return true;
@@ -193,49 +194,80 @@ namespace NoSmokeStayLit
         }
 
         [HarmonyPatch(typeof(Fireplace), nameof(Fireplace.IsBurning))]
-        class FireplaceIsBurning_Patch
+        private class FireplaceIsBurning_Patch
         {
-            static void Postfix(Fireplace __instance, ref bool __result, ref GameObject ___m_enabledObject, ref ZNetView ___m_nview)
+            private static void Postfix(Fireplace __instance, ref bool __result, ref GameObject ___m_enabledObjectHigh, ref ZNetView ___m_nview)
             {
                 if (affectedSources.Contains(Utils.GetPrefabName(__instance.gameObject)))
                 {
-                 
-                        if (_configNoFuelNeeded.Value)
+                    if (_configNoFuelNeeded.Value)
+                    {
+                        //torches don't have smoke. Checking for null so no errors but still want to turn off smoke for braziers
+                        if (__instance.m_smokeSpawner != null)
                         {
-                            __result = true;
-                        try
-                        {
+                            //turns off the smoke and keeps the fire lit in the rain
                             __instance.m_smokeSpawner.enabled = false;
-                        }
-                        catch
-                        {
+                            __instance.m_wet = false;
+                            __result = true;
 
-                        }
                             return;
                         }
+                        // sets the wet check false so the fire will stay lit in the rain
+                        __instance.m_wet = false;
+
+                        //Searches the parent item and gets the child to set the Smokespawner false.  Thank you Azumatt you are a God//
+
+                        Utils.FindChild(__instance.transform, "SmokeSpawner").gameObject.GetComponent<SmokeSpawner>().enabled = false;
+                        __result = true;
+                        return;
+                    }
+                    //checks the fuel level and if fuel is configured.  If so and there is no fuel it turns off the torch
                     if ((int)Math.Ceiling(__instance.GetComponent<ZNetView>().GetZDO().GetFloat("fuel")) == 0 && !_configNoFuelNeeded.Value)
 
                     {
                         __result = false;
-                       // __instance.m_smokeSpawner.enabled = true;
-                        //return;
+                        return;
                     }
-
-                    else
-                    { 
+                    //torches don't have smoke. Checking for null so no errors but still want to turn off smoke for braziers and firepits
+                    if (__instance.m_smokeSpawner != null)
+                    {
+                        __instance.m_wet = false;
+                        __instance.m_smokeSpawner.enabled = false;
                         __result = true;
-                        //torches don't have smoke and will error out.  Catch the error and move on.
-                        try
-                        {
-                            __instance.m_smokeSpawner.enabled = false;
-                        }
-                        catch 
-                        { 
-                        }
-                       
-                        //return;
+                        return;
+                    }
+                    else
+                    {
+                        //Searches the parent item and gets the child to set the Smokespawner false.  Thank you Azumatt you are a God//
+                        Utils.FindChild(__instance.transform, "SmokeSpawner").gameObject.GetComponent<SmokeSpawner>().enabled = false;
+                        __instance.m_wet = false;
+                        __result = true;
+                        return;
                     }
                 }
+            }
+        }
+
+        //-----------------------------------------------------------------
+        //This takes away the blockedSmoke check so smelters can be stacked.
+        //------------------------------------------------------------------
+        [HarmonyPatch(typeof(Smelter), "UpdateSmoke")]
+        private class SmelterUpdateSmoke_Patch
+        {
+            private static void Postfix(Smelter __instance)
+
+            {
+                if (__instance.m_smokeSpawner != null)
+                {
+                    //checks to see if stack smelters is true and kills off the smoke blocked check
+                    if (_configStackSmelters.Value)
+                    {
+                        __instance.m_smokeSpawner.enabled = false;
+                        __instance.m_blockedSmoke = false;
+                        return;
+                    }
+                }
+               
             }
         }
     }

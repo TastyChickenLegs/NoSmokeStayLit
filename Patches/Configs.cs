@@ -44,7 +44,9 @@ internal class Configs
 
     internal static void Generate()
     {
-        //A portion of this code provided in Flame Eternal by Markinator  all credit
+        //A portion of this code provided in Fuel Eternal by Markinator  all credit
+        //    //This code provided in Fuel Eternal by Markinator  all credit
+        //  used here with permission.
         //Items//
         fe_fire_pit = NoSmokeStayLit.context.config("Fireplaces", "Camp Fire Keep Lit", true, "Allow eternal fuel for Campfire");
         fe_bonfire = NoSmokeStayLit.context.config("Fireplaces", "Bonfire Keep Lit", true, "Allow eternal fuel for Bonfire");

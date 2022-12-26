@@ -35,37 +35,37 @@ See the images for a list of configurable items.
 ### List of supported objects:
 
 |Config Option|Definition
-        |---|---|
-        |fe_fire_pit | Allow eternal fuel for Campfire|
-        |fe_bonfire  | Allow eternal fuel for Bonfire|
-        |fe_hearth    | Allow eternal fuel for Hearth|
-        |fe_piece_walltorch | Allow eternal fuel for Sconce|
-        |fe_piece_groundtorch | Allow eternal fuel for Standing iron torch|
-        |fe_piece_groundtorch_wood | Allow eternal fuel for Standing wood torch|
-        |fe_piece_groundtorch_green | Allow eternal fuel for Standing green-burning iron torch|
-        |fe_piece_groundtorch_blue | Allow eternal fuel for Standing blue-burning iron torch|
-        |fe_piece_brazierfloor01 | Allow eternal fuel for Standing brazier|
-        |fe_piece_brazierceiling01 | Allow eternal fuel for Hanging brazier|
-        |fe_piece_jackoturnip | Allow eternal fuel for Jack-o-turnip|
-        |fe_piece_oven | Allow eternal fuel for Stone oven|
-        |fe_piece_bathtub | Allow eternal fuel for Hot tub|
-        |fe_smelter |Allow eternal fuel for Smelter|
-        |fe_blastfurnace | Allow eternal fuel for Blast furnace|
-        |fe_eitrrefinery | Allow eternal fuel for Eitr refinery|
-        |fe_custom_instance | Allow to manage fuel for custom items added by other mods|  
-        |fe_piece_walltorch_timer | Allow timer fuel for Sconce|
-        |fe_piece_groundtorch_timer | Allow timer for Standing iron torch|
-        |fe_piece_groundtorch_wood_timer | Allow timer for Standing wood torch|
-        |fe_piece_groundtorch_green_timer |Allow timer for Standing green-burning iron torch|
-        |fe_piece_groundtorch_blue_timer | Allow timer for Standing blue-burning iron torch|
-        |fe_piece_brazierfloor01_timer | Allow timer for Standing brazier|
-        |fe_piece_brazierceiling01_timer | Allow timer for Hanging brazier|
-        |fe_piece_jackoturnip_timer | Allow timer for Jack-o-turnip|
-        |fe_custom_instance_timer | Enable Timers for items added by other mods|
-        |keepOnInRain | Keep fires lit even when raining and wet|
-        |configOnTimeOne | Convert desired time to military time (24hr) and /24.  Example 6:30am is 6.30 hours /24 = .67|
-        |configOffTimeOne | Convert desired time to military time (24hr) and /24.  Example 8:30pm is 16.30 hours /24 = .67|
-        |configAlwaysOnInDarkBiomes | Always On In Dark Biomes or storming|
+|---|---|
+|fe_fire_pit | Allow eternal fuel for Campfire
+|fe_bonfire  | Allow eternal fuel for Bonfire
+|fe_hearth    | Allow eternal fuel for Hearth
+|fe_piece_walltorch | Allow eternal fuel for Sconce
+|fe_piece_groundtorch | Allow eternal fuel for Standing iron torch
+|fe_piece_groundtorch_wood | Allow eternal fuel for Standing wood torch
+|fe_piece_groundtorch_green | Allow eternal fuel for Standing green-burning iron torch
+|fe_piece_groundtorch_blue | Allow eternal fuel for Standing blue-burning iron torch
+|fe_piece_brazierfloor01 | Allow eternal fuel for Standing brazier
+|fe_piece_brazierceiling01 | Allow eternal fuel for Hanging brazier
+|fe_piece_jackoturnip | Allow eternal fuel for Jack-o-turnip
+|fe_piece_oven | Allow eternal fuel for Stone oven
+|fe_piece_bathtub | Allow eternal fuel for Hot tub
+|fe_smelter |Allow eternal fuel for Smelter
+|fe_blastfurnace | Allow eternal fuel for Blast furnace
+|fe_eitrrefinery | Allow eternal fuel for Eitr refinery
+|fe_custom_instance | Allow to manage fuel for custom items added by other mods 
+|fe_piece_walltorch_timer | Allow timer fuel for Sconce
+|fe_piece_groundtorch_timer | Allow timer for Standing iron torch
+|fe_piece_groundtorch_wood_timer | Allow timer for Standing wood torch
+|fe_piece_groundtorch_green_timer |Allow timer for Standing green-burning iron torch
+|fe_piece_groundtorch_blue_timer | Allow timer for Standing blue-burning iron torch
+|fe_piece_brazierfloor01_timer | Allow timer for Standing brazier
+|fe_piece_brazierceiling01_timer | Allow timer for Hanging brazier
+|fe_piece_jackoturnip_timer | Allow timer for Jack-o-turnip
+|fe_custom_instance_timer | Enable Timers for items added by other mods
+|keepOnInRain | Keep fires lit even when raining and wet
+|configOnTimeOne | Convert desired time to military time (24hr) and /24.  Example 6:30am is 6.30 hours /24 = .67
+|configOffTimeOne | Convert desired time to military time (24hr) and /24.  Example 8:30pm is 16.30 hours /24 = .67
+|configAlwaysOnInDarkBiomes | Always On In Dark Biomes or storming
 
 <b>all fire sources can be added</b>
 - Custom modded items can be added as well..

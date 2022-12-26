@@ -21,6 +21,7 @@ created a super simple config so everyone can easily chose the features they nee
 
 ### Credits:
 
+- Aedenthorn because without her code repository, I would have never understood how to do any of this.
 - Azumatt for help with the braziers
 - Red Seiko (Comfy) for guidance on the configuration file
 - Marfinator for allowing me to use some code from his awesome mod "Fuel Eternal"

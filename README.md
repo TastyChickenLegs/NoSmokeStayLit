@@ -85,6 +85,11 @@ Start the game.
 
 ### Version Information
 
+2.0.0
+
+- Complete rewrite of Mod to include Timed Torches and several other features
+- Look at the Images for information regarding Config Options
+
 1.1.6
 
 - fixed bug in torches. They now stay lit, dry and fueled accordingly.

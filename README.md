@@ -27,6 +27,7 @@ created a super simple config so everyone can easily chose the features they nee
 - Marfinator for allowing me to use some code from his awesome mod "Fuel Eternal"
 
 ### Configuration:
+![Settings Image](https://github.com/TastyChickenLegs/NoSmokeStayLit/blob/master/settings.png)
 
 Completely redone with everything selectable and even the ability to add custom items.
 

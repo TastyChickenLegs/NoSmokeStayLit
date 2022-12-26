@@ -19,6 +19,11 @@ created a super simple config so everyone can easily chose the features they nee
 
 ``Turn version-check off in the config if having troubles or it is not needed for your gameplay.``
 
+### Credits:
+
+- Azumatt for help with the braziers
+- Red Seiko (Comfy) for guidance on the configuration file
+- Marfinator for allowing me to use some code from his awesome mod "Fuel Eternal"
 
 ### Configuration:
 

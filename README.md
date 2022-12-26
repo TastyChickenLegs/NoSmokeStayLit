@@ -10,7 +10,7 @@ and creates a super simple config that allows anyone to have the features they n
 - Complete customization of Torches, Smelters, HotTubs, Ovens
 - Keep some torches on timers and other on all the time.
 - Stop the smoke and stack those smelters
-
+- ServerSync to push configurations to all users - Ability to turn off
 
 ### About the Mod:
 I had issues keeping several mods updated with overlapping features.  I combined them into this one and

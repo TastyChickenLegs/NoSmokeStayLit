@@ -85,7 +85,7 @@ Start the game.
 
 ### Version Information
 
-2.0.0
+2.0.0 Beta
 
 - Complete rewrite of Mod to include Timed Torches and several other features
 - Look at the Images for information regarding Config Options

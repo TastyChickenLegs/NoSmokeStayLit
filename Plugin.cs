@@ -15,7 +15,7 @@ namespace NoSmokeStayLit
         public static NoSmokeStayLit context;
         private readonly Harmony harmony = new Harmony("tastychickenlegs.NoSmokeStayLit");
         internal const string ModName = "NoSmokeStayLit";
-        internal const string ModVersion = "1.1.6";
+        internal const string ModVersion = "2.0.0"
         internal const string Author = "tastychickenlegs";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";

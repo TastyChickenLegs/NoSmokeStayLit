@@ -10,7 +10,7 @@ and creates a super simple config that allows anyone to have the features they n
 - Complete customization of Torches, Smelters, HotTubs, Ovens
 - Keep some torches on timers and other on all the time.
 - Stop the smoke and stack those smelters
-
+- ServerSync to push configurations to all users - Ability to turn off
 
 ### About the Mod:
 I had issues keeping several mods updated with overlapping features.  I combined them into this one and
@@ -21,6 +21,7 @@ created a super simple config so everyone can easily chose the features they nee
 
 ### Credits:
 
+- Aedenthorn because without her code repository, I would have never understood how to do any of this.
 - Azumatt for help with the braziers
 - Red Seiko (Comfy) for guidance on the configuration file
 - Marfinator for allowing me to use some code from his awesome mod "Fuel Eternal"

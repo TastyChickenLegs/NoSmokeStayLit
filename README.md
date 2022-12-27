@@ -13,6 +13,9 @@ and creates a super simple config that allows anyone to have the features they n
 - ServerSync to push configurations to all users - Ability to turn off
 - New sliders for Torch Timers.  Select your hour and min... I do all the math automatically.
 
+Bug reports should go on this site or my [Github.](https://github.com/TastyChickenLegs/NoSmokeStayLit)  
+[Chat with me on Discord](https://discord.com/users/TastyChickenLegs#4818)
+
 ### About the Mod:
 I had issues keeping several mods updated with overlapping features.  I combined them into this one and
 created a super simple config so everyone can easily chose the features they need for their type of gameplay.

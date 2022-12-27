@@ -174,25 +174,25 @@ namespace NoSmokeStayLit
         {
             float timerValOnHours = Convert.ToSingle(Configs.timerOnHours.Value);
             timerValOnHours = timerValOnHours / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOnHours);
+            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOnHours);
 
             float timerValOnMins = Convert.ToSingle(Configs.timerOnMinutes.Value);
             timerValOnMins = (timerValOnMins / 60) / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOnMins);
+            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOnMins);
 
             timerOnFloatTime = (timerValOnMins + timerValOnHours);
-            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerOnFloatTime);
+            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerOnFloatTime);
 
             float timerValOffHours = Convert.ToSingle(Configs.timerOffHours.Value);
             timerValOffHours = timerValOffHours / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOffHours);
+            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOffHours);
 
             float timerValOffMins = Convert.ToSingle(Configs.timerOffMinutes.Value);
             timerValOffMins = (timerValOffMins / 60) / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOffMins);
+            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOffMins);
 
             timerOffFloatTime = (timerValOffMins + timerValOffHours);
-            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerOffFloatTime);
+            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerOffFloatTime);
         }
     }
 }

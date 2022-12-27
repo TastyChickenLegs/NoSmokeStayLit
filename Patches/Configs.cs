@@ -85,16 +85,16 @@ internal class Configs
             "comma-separated no spaces (e.g. \"rk_campfire,rk_hearth,rk_brazier\" )");
         keepOnInRain = NoSmokeStayLit.context.config<bool>("Basic", "Keep on when wet", true, "Keep fires lit even when raining and wet");
         //Timer Settings//
-        timerOnHours = NoSmokeStayLit.context.config("Timers", "Timer On Hours", 17, 
+        timerOnHours = NoSmokeStayLit.context.config("Timers", "Timer On Hours (Night Time)", 17, 
             new ConfigDescription("Time to Turn on at night in 24 hour time.  Example 7pm is 19 hours.", 
             new AcceptableValueRange<int>(0, 24), null, new ConfigurationManagerAttributes { Order = 12 }));
-        timerOnMinutes = NoSmokeStayLit.context.config("Timers", "Timer On Mins", 0, 
+        timerOnMinutes = NoSmokeStayLit.context.config("Timers", "Timer On Mins (Night Time)", 0, 
             new ConfigDescription("Minutes in the hour.  This will be added to the hours above.", 
             new AcceptableValueRange<int>(0, 60),null,new ConfigurationManagerAttributes { Order = 11}));
-        timerOffHours = NoSmokeStayLit.context.config("Timers", "Timer Off Hours", 5, 
+        timerOffHours = NoSmokeStayLit.context.config("Timers", "Timer Off Hours (Day Time)", 5, 
             new ConfigDescription("Time to Turn off the monring in 24 hour time.  Example 7pm is 19 hours.", 
             new AcceptableValueRange<int>(0, 24), null, new ConfigurationManagerAttributes { Order = 10 }));
-        timerOffMinutes = NoSmokeStayLit.context.config("Timers", "Timer Off Mins", 30, 
+        timerOffMinutes = NoSmokeStayLit.context.config("Timers", "Timer Off Mins (Day Time)", 30, 
             new ConfigDescription("Minutes in the hour.  This will be added to the hours above.", 
             new AcceptableValueRange<int>(0, 60), null, new ConfigurationManagerAttributes { Order = 9 }));
        

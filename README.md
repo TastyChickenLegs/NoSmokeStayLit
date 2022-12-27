@@ -11,6 +11,7 @@ and creates a super simple config that allows anyone to have the features they n
 - Keep some torches on timers and other on all the time.
 - Stop the smoke and stack those smelters
 - ServerSync to push configurations to all users - Ability to turn off
+- New sliders for Torch Timers.  Select your hour and min... I do all the math automatically.
 
 ### About the Mod:
 I had issues keeping several mods updated with overlapping features.  I combined them into this one and
@@ -27,7 +28,7 @@ created a super simple config so everyone can easily chose the features they nee
 - Marfinator for allowing me to use some code from his awesome mod "Fuel Eternal"
 
 ### Configuration:
-![Settings Image](https://github.com/TastyChickenLegs/NoSmokeStayLit/blob/master/settings.png)
+![Settings Image](https://i.ibb.co/MnKWXxT/New-Settings.png)
 
 Completely redone with everything selectable and even the ability to add custom items.
 
@@ -70,8 +71,8 @@ See the images for a list of configurable items.
 |fe_piece_jackoturnip_timer | Allow timer for Jack-o-turnip
 |fe_custom_instance_timer | Enable Timers for items added by other mods
 |keepOnInRain | Keep fires lit even when raining and wet
-|configOnTimeOne | Convert desired time to military time (24hr) and /24.  Example 6:30am is 6.30 hours /24 = .67
-|configOffTimeOne | Convert desired time to military time (24hr) and /24.  Example 8:30pm is 16.30 hours /24 = .67
+|configOnTime Hours and Mins  | Convert desired time to military time (24hr) and /24.  Use the new slider for super simple config
+|configOffTime Hours and Mins | Convert desired time to military time (24hr) and /24.  Use the new slider for super sipmle config
 |configAlwaysOnInDarkBiomes | Always On In Dark Biomes or storming
 
 <b>all fire sources can be added</b>
@@ -87,7 +88,7 @@ Start the game.
 
 ### Version Information
 
-2.0.0 Beta
+2.0.0 Release
 
 - Complete rewrite of Mod to include Timed Torches and several other features
 - Look at the Images for information regarding Config Options

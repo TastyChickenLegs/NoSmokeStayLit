@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using System.Reflection;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace NoSmokeStayLit.Patches
     [HarmonyPatch(typeof(Fireplace), nameof(Fireplace.IsBurning))]
     internal class FireplaceIsBurning_Patch
     {
+       
+
         private static void Postfix(Fireplace __instance, ref bool __result,
                  ref GameObject ___m_enabledObjectHigh, ref ZNetView ___m_nview)
         {
@@ -18,16 +21,25 @@ namespace NoSmokeStayLit.Patches
             if (Configs.ConfigCheckTimerOne(__instance.name))  
             {
                 //NoSmokeStayLit.TastyUtilsLogger.LogInfo(Configs.ConfigCheckTimerOne(__instance.name));
+                
 
-                if (Configs.configOffTimeOne.Value < Configs.configOnTimeOne.Value)
+                if (NoSmokeStayLit.timerOffFloatTime > NoSmokeStayLit.timerOnFloatTime)
                 {
-                    shouldBeLit = false;
+                    //NoSmokeStayLit.TastyUtilsLogger.LogInfo(NoSmokeStayLit.timerOffFloatTime);
+                    //NoSmokeStayLit.TastyUtilsLogger.LogInfo(NoSmokeStayLit.timerOnFloatTime);
+                    //
+                    if ((dayFraction <= NoSmokeStayLit.timerOnFloatTime && dayFraction >= 1f) || dayFraction >= NoSmokeStayLit.timerOffFloatTime)
+                    {
+                     
+                        shouldBeLit = false;
                     __result = false;
                     return;
+                    }
+                   
                 }
-                else if (dayFraction <= Configs.configOnTimeOne.Value && dayFraction >= Configs.configOffTimeOne.Value)
+                else if (dayFraction <= NoSmokeStayLit.timerOnFloatTime && dayFraction >= NoSmokeStayLit.timerOffFloatTime)
                 {
-                    NoSmokeStayLit.TastyUtilsLogger.LogInfo(dayFraction);
+                    //NoSmokeStayLit.TastyUtilsLogger.LogInfo(dayFraction);
                     shouldBeLit = false;
                     __result = false;
                     return;
@@ -77,5 +89,6 @@ namespace NoSmokeStayLit.Patches
                 }
             }
         }
+        
     }
 }

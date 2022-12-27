@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Patches\Configs.cs" />
+    <Compile Include="Patches\ConfigurationManagerAttributes.cs" />
     <Compile Include="Patches\InterfacePatch.cs" />
     <Compile Include="Patches\KeepFueledPatch.cs" />
     <Compile Include="Patches\NoSmokePatch.cs" />

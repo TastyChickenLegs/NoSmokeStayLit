@@ -22,7 +22,7 @@ namespace NoSmokeStayLit.Patches
             {
                 if (Configs.ConfigCheck(__instance.name))
                     fuel = __instance.m_maxFuel;
-                NoSmokeStayLit.TastyUtilsLogger.LogInfo(fuel);
+                //NoSmokeStayLit.TastyUtilsLogger.LogInfo(fuel);
             }
         }
 

@@ -39,6 +39,12 @@ internal class Configs
     public static ConfigEntry<bool> fe_piece_brazierceiling01_timer;
     public static ConfigEntry<bool> fe_piece_jackoturnip_timer;
     private static ConfigEntry<string> fe_custom_instance_timer;
+    public static ConfigEntry<int> timerOnMinutes;
+    public static ConfigEntry<int> timerOnHours;
+    public static ConfigEntry<int> timerOffMinutes;
+    public static ConfigEntry<int> timerOffHours;
+    public static float timerOnFloatTime;
+    public static float timerOffFloatTime;
     //public static float lastFuel;
     //public static int fuelCount;
 
@@ -66,7 +72,7 @@ internal class Configs
         fe_eitrrefinery = NoSmokeStayLit.context.config("Smelters", "EitrRefinery Keep Fueled", false, "Allow eternal fuel for Eitr refinery");
         fe_custom_instance = NoSmokeStayLit.context.config("Custom", "Custom Items Keep Lit", "", "Enable Fuel Eternal to manage fuel for custom items added by other mods, " +
             "comma-separated no spaces (e.g. \"rk_campfire,rk_hearth,rk_brazier\" )");
-      
+       
         fe_piece_walltorch_timer = NoSmokeStayLit.context.config("Timers", "Wall Torch on Timer", true, "Allow timer fuel for Sconce");
         fe_piece_groundtorch_timer = NoSmokeStayLit.context.config("Timers", "Metal Torch On Timer", true, "Allow timer for Standing iron torch");
         fe_piece_groundtorch_wood_timer = NoSmokeStayLit.context.config("Timers", "Wood Torch on Timer", true, "Allow timer for Standing wood torch");
@@ -79,13 +85,32 @@ internal class Configs
             "comma-separated no spaces (e.g. \"rk_campfire,rk_hearth,rk_brazier\" )");
         keepOnInRain = NoSmokeStayLit.context.config<bool>("Basic", "Keep on when wet", true, "Keep fires lit even when raining and wet");
         //Timer Settings//
+        timerOnHours = NoSmokeStayLit.context.config("Timers", "Timer On Hours", 17, 
+            new ConfigDescription("Time to Turn on at night in 24 hour time.  Example 7pm is 19 hours.", 
+            new AcceptableValueRange<int>(0, 24), null, new ConfigurationManagerAttributes { Order = 12 }));
+        timerOnMinutes = NoSmokeStayLit.context.config("Timers", "Timer On Mins", 0, 
+            new ConfigDescription("Minutes in the hour.  This will be added to the hours above.", 
+            new AcceptableValueRange<int>(0, 60),null,new ConfigurationManagerAttributes { Order = 11}));
+        timerOffHours = NoSmokeStayLit.context.config("Timers", "Timer Off Hours", 5, 
+            new ConfigDescription("Time to Turn off the monring in 24 hour time.  Example 7pm is 19 hours.", 
+            new AcceptableValueRange<int>(0, 24), null, new ConfigurationManagerAttributes { Order = 10 }));
+        timerOffMinutes = NoSmokeStayLit.context.config("Timers", "Timer Off Mins", 30, 
+            new ConfigDescription("Minutes in the hour.  This will be added to the hours above.", 
+            new AcceptableValueRange<int>(0, 60), null, new ConfigurationManagerAttributes { Order = 9 }));
+       
+        //configOnTimeOne = NoSmokeStayLit.context.config("Timers", "Timer On Time 4:30 PM (Evening)", 0.6875f, new ConfigDescription("To find time." +
+        //    "(This is not exact but close enough)  Convert desired time to military time (24hr) and /24.  Example 6:30am is 6.30 hours /24 = .67"
+        //    , null, new ConfigurationManagerAttributes { Order = 9 }));
 
-        configOnTimeOne = NoSmokeStayLit.context.config("Timers", "On Time", 0.6875f, "To find time.(This is not exact but close enough)  Convert desired time to military time (24hr) and /24.  Example 6:30am is 6.30 hours /24 = .67");
-        configOffTimeOne = NoSmokeStayLit.context.config("Timers", "Off Time", 0.27f, "To find time. (This is not exact but close enough) Convert desired time to military time (24hr) and /24.  Example 8:30pm is 16.30 hours /24 = .67");
+        //configOffTimeOne = NoSmokeStayLit.context.config("Timers", "Timer Off Time 6:30 AM (Morning)", 0.27f, new ConfigDescription("To find time. " +
+        //    "(This is not exact but close enough) Convert desired time to military time (24hr) and /24.  Example 8:30pm is 16.30 hours /24 = .67",
+        //    null, new ConfigurationManagerAttributes { Order = 10 }));
 
         //General Torch Settings//
 
-        configAlwaysOnInDarkBiomes = NoSmokeStayLit.context.config("Basic", "Always On In Dark Biomes", true, "If true, torches will always burn in areas that Valheim considers 'always dark'. E.g Mistlands or any biome during a storm");
+        configAlwaysOnInDarkBiomes = NoSmokeStayLit.context.config("Basic", "Always On In Dark Biomes", true, 
+            "If true, torches will always burn in areas that Valheim considers 'always dark'." +
+            " E.g Mistlands or any biome during a storm");
     }
 
     public static bool ConfigCheck(string instanceName)

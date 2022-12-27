@@ -4,6 +4,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using NoSmokeStayLit.Patches;
 using ServerSync;
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace NoSmokeStayLit
         public static NoSmokeStayLit context;
         private readonly Harmony harmony = new Harmony("tastychickenlegs.NoSmokeStayLit");
         internal const string ModName = "NoSmokeStayLit";
-        internal const string ModVersion = "2.0.0"
+        internal const string ModVersion = "2.0.0";
         internal const string Author = "tastychickenlegs";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
@@ -26,7 +27,8 @@ namespace NoSmokeStayLit
 
         public static readonly ManualLogSource TastyUtilsLogger =
             BepInEx.Logging.Logger.CreateLogSource(ModName);
-
+        public static float timerOnFloatTime;
+        public static float timerOffFloatTime;
         private static readonly ConfigSync ConfigSync = new(ModGUID)
         { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion };
 
@@ -50,21 +52,17 @@ namespace NoSmokeStayLit
                 //_configNexusID = config("Basic", "NexusID", 2027, "Nexus mod ID for 'Nexus Update Check' mod compatibility.");
                 _configVerifyClient = config("Basic", "Verify Clients", false, "Enable this to turn on the client verification and version checks.");
             }
+           
             //Generate the Configs
             Configs.Generate();
-
+            GogetTime();
             _harmony.PatchAll();
+            
             SetupWatcher();
+            
         }
         private void Update()
         {
-            
-            //if (Input.GetKeyDown(Configs.toggleKey.Value.MainKey)) 
-            //{
-            //    Configs.isOn = !isOn;
-            //    Config.Save();
-            //    Player.m_localPlayer.Message(MessageHud.MessageType.Center, string.Format(Configs.toggleString, isOn), 0, null);
-            //}
 
         }
         private void OnDestroy()
@@ -90,7 +88,9 @@ namespace NoSmokeStayLit
             try
             {
                 NoSmokeStayLit.TastyUtilsLogger.LogDebug("ReadConfigValues called");
+                
                 Config.Reload();
+                GogetTime();
             }
             catch
             {
@@ -102,7 +102,7 @@ namespace NoSmokeStayLit
         #region ConfigOptions
 
         private static ConfigEntry<Toggle> _serverConfigLocked = null!;
-        private static ConfigEntry<int> _configNexusID;
+        //private static ConfigEntry<int> _configNexusID;
         private static ConfigEntry<bool> _configEnabled;
         private static ConfigEntry<bool> _configVerifyClient;
 
@@ -169,6 +169,30 @@ namespace NoSmokeStayLit
                 }
                 return true;
             }
+        }
+        private static void GogetTime()
+        {
+            float timerValOnHours = Convert.ToSingle(Configs.timerOnHours.Value);
+            timerValOnHours = timerValOnHours / 24;
+            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOnHours);
+
+            float timerValOnMins = Convert.ToSingle(Configs.timerOnMinutes.Value);
+            timerValOnMins = (timerValOnMins / 60) / 24;
+            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOnMins);
+
+            timerOnFloatTime = (timerValOnMins + timerValOnHours);
+            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerOnFloatTime);
+
+            float timerValOffHours = Convert.ToSingle(Configs.timerOffHours.Value);
+            timerValOffHours = timerValOffHours / 24;
+            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOffHours);
+
+            float timerValOffMins = Convert.ToSingle(Configs.timerOffMinutes.Value);
+            timerValOffMins = (timerValOffMins / 60) / 24;
+            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerValOffMins);
+
+            timerOffFloatTime = (timerValOffMins + timerValOffHours);
+            NoSmokeStayLit.TastyUtilsLogger.LogInfo(timerOffFloatTime);
         }
     }
 }

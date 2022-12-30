@@ -31,7 +31,11 @@ created a super simple config so everyone can easily chose the features they nee
 - Marfinator for allowing me to use some code from his awesome mod "Fuel Eternal"
 
 ### Configuration:
-![Settings Image](https://i.ibb.co/MnKWXxT/New-Settings.png)
+![Settings Image](https://i.ibb.co/P9WGbfc/top.png)
+![Settings Image](https://i.ibb.co/8487ZYK/bottom.png)
+
+
+
 
 Completely redone with everything selectable and even the ability to add custom items.
 
@@ -77,6 +81,11 @@ See the images for a list of configurable items.
 |configOnTime Hours and Mins  | Convert desired time to military time (24hr) and /24.  Use the new slider for super simple config
 |configOffTime Hours and Mins | Convert desired time to military time (24hr) and /24.  Use the new slider for super sipmle config
 |configAlwaysOnInDarkBiomes | Always On In Dark Biomes or storming
+|fe_fire_pit_smoke | Enable eternal Smoke for Bonfire|
+|fe_hearth_smoke = | Enable Smoke for Hearth|
+|fe_piece_brazierfloor01_smoke |Enable for Standing brazier|
+|fe_piece_brazierceiling01_smoke |Enable timer for Hanging brazier|
+|fe_smelter_smoke |Enable Smoke for Smelter.  This disables Smelter Stacking|
 
 <b>all fire sources can be added</b>
 - Custom modded items can be added as well..
@@ -90,6 +99,11 @@ Extract DLL from zip file into "<GameDirectory>\Bepinex\plugins"
 Start the game.
 
 ### Version Information
+2.1.0 Release
+
+- Added the ability to turn back on the smoke for some items.
+- Fixed a few bugs with the Timed Torches feature
+- Tested with some custom items.
 
 2.0.0 Release
 

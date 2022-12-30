@@ -1,6 +1,4 @@
-﻿using BepInEx.Configuration;
-using HarmonyLib;
-using UnityEngine;
+﻿using HarmonyLib;
 
 namespace NoSmokeStayLit.Patches
 {
@@ -13,7 +11,19 @@ namespace NoSmokeStayLit.Patches
             private static void Postfix(Smelter __instance)
 
             {
-                if (Configs.ConfigCheck(__instance.name))
+                if (Configs.ConfigCheckGiveMeSmoke(__instance.name))
+                {
+                    if (__instance.m_smokeSpawner != null)
+                    {
+                        //checks to see if stack smelters is true and kills off the smoke blocked check
+
+                        __instance.m_smokeSpawner.enabled = true;
+                        __instance.m_blockedSmoke = true;
+                        return;
+                    }
+                }
+                else
+
                 {
                     if (__instance.m_smokeSpawner != null)
                     {
@@ -22,7 +32,6 @@ namespace NoSmokeStayLit.Patches
                         __instance.m_smokeSpawner.enabled = false;
                         __instance.m_blockedSmoke = false;
                         return;
-
                     }
                 }
             }

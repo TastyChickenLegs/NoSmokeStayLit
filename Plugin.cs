@@ -16,7 +16,7 @@ namespace NoSmokeStayLit
         public static NoSmokeStayLit context;
         private readonly Harmony harmony = new Harmony("tastychickenlegs.NoSmokeStayLit");
         internal const string ModName = "NoSmokeStayLit";
-        internal const string ModVersion = "2.0.0";
+        internal const string ModVersion = "2.1.0";
         internal const string Author = "tastychickenlegs";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
@@ -45,12 +45,12 @@ namespace NoSmokeStayLit
                 "If on, the configuration is locked and can be changed by server admins only.");
             _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
 
-            _configEnabled = config("Basic", "Mod Enabled", true, "Sets the mod to be enabled or not.");
+            _configEnabled = config("Basic Settings", "Mod Enabled", true, "Sets the mod to be enabled or not.");
 
             if (_configEnabled.Value)
             {
                 //_configNexusID = config("Basic", "NexusID", 2027, "Nexus mod ID for 'Nexus Update Check' mod compatibility.");
-                _configVerifyClient = config("Basic", "Verify Clients", false, "Enable this to turn on the client verification and version checks.");
+                _configVerifyClient = config("Basic Settings", "Verify Clients", false, "Enable this to turn on the client verification and version checks.");
             }
            
             //Generate the Configs

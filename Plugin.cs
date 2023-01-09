@@ -8,23 +8,27 @@ using System;
 using System.IO;
 using UnityEngine;
 
+
 namespace NoSmokeStayLit
 {
     [BepInPlugin(ModGUID, ModName, ModVersion)]
-    public class NoSmokeStayLit : BaseUnityPlugin
+    public class NoSmokeStayLitMain : BaseUnityPlugin
     {
-        public static NoSmokeStayLit context;
-        private readonly Harmony harmony = new Harmony("tastychickenlegs.NoSmokeStayLit");
+        public static NoSmokeStayLitMain context;
+        private readonly Harmony harmony = new Harmony("Tastychickenlegs.NoSmokeStayLit");
         internal const string ModName = "NoSmokeStayLit";
-        internal const string ModVersion = "2.1.0";
-        internal const string Author = "tastychickenlegs";
+        internal const string ModVersion = "2.2.1";
+        internal const string Author = "Tastychickenlegs";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
         private static string ConfigFileFullPath = Paths.ConfigPath + Path.DirectorySeparatorChar + ConfigFileName;
         internal static string ConnectionError = "";
         public static bool configVerifyClient => _configVerifyClient.Value;
         private readonly Harmony _harmony = new(ModGUID);
-
+        private static ConfigEntry<Toggle> _serverConfigLocked = null!;
+        //private static ConfigEntry<int> _configNexusID;
+        private static ConfigEntry<bool> _configEnabled;
+        private static ConfigEntry<bool> _configVerifyClient;
         public static readonly ManualLogSource TastyUtilsLogger =
             BepInEx.Logging.Logger.CreateLogSource(ModName);
         public static float timerOnFloatTime;
@@ -43,8 +47,8 @@ namespace NoSmokeStayLit
             context = this;
             _serverConfigLocked = config("", "Lock Configuration", Toggle.On,
                 "If on, the configuration is locked and can be changed by server admins only.");
-            _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
-
+            _= ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
+            _configVerifyClient = config("Basic Settings", "Verify Clients", true, "Enable this to turn on the client verification and version checks.");
             _configEnabled = config("Basic Settings", "Mod Enabled", true, "Sets the mod to be enabled or not.");
 
             if (_configEnabled.Value)
@@ -87,24 +91,21 @@ namespace NoSmokeStayLit
             if (!File.Exists(ConfigFileFullPath)) return;
             try
             {
-                NoSmokeStayLit.TastyUtilsLogger.LogDebug("ReadConfigValues called");
+                TastyUtilsLogger.LogDebug("ReadConfigValues called");
                 
                 Config.Reload();
                 GogetTime();
             }
             catch
             {
-                NoSmokeStayLit.TastyUtilsLogger.LogError($"There was an issue loading your {ConfigFileName}");
-                NoSmokeStayLit.TastyUtilsLogger.LogError("Please check your config entries for spelling and format!");
+                TastyUtilsLogger.LogError($"There was an issue loading your {ConfigFileName}");
+                TastyUtilsLogger.LogError("Please check your config entries for spelling and format!");
             }
         }
 
         #region ConfigOptions
 
-        private static ConfigEntry<Toggle> _serverConfigLocked = null!;
-        //private static ConfigEntry<int> _configNexusID;
-        private static ConfigEntry<bool> _configEnabled;
-        private static ConfigEntry<bool> _configVerifyClient;
+
 
         internal ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description,
             bool synchronizedSetting = true)
@@ -132,6 +133,7 @@ namespace NoSmokeStayLit
         private class ConfigurationManagerAttributes
         {
             public bool? Browsable = false;
+            
         }
 
         private class AcceptableShortcuts : AcceptableValueBase
@@ -158,7 +160,7 @@ namespace NoSmokeStayLit
                 if (!_configEnabled.Value)
                     return true;
                 string text = __instance.m_input.text;
-                if (text.ToLower().Equals($"{typeof(NoSmokeStayLit).Namespace.ToLower()} reset"))
+                if (text.ToLower().Equals($"{typeof(NoSmokeStayLitMain).Namespace.ToLower()} reset"))
                 {
                     context.Config.Reload();
                     context.Config.Save();
@@ -174,25 +176,25 @@ namespace NoSmokeStayLit
         {
             float timerValOnHours = Convert.ToSingle(Configs.timerOnHours.Value);
             timerValOnHours = timerValOnHours / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOnHours);
+            TastyUtilsLogger.LogDebug(timerValOnHours);
 
             float timerValOnMins = Convert.ToSingle(Configs.timerOnMinutes.Value);
             timerValOnMins = (timerValOnMins / 60) / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOnMins);
+            TastyUtilsLogger.LogDebug(timerValOnMins);
 
             timerOnFloatTime = (timerValOnMins + timerValOnHours);
-            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerOnFloatTime);
+            TastyUtilsLogger.LogDebug(timerOnFloatTime);
 
             float timerValOffHours = Convert.ToSingle(Configs.timerOffHours.Value);
             timerValOffHours = timerValOffHours / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOffHours);
+            TastyUtilsLogger.LogDebug(timerValOffHours);
 
             float timerValOffMins = Convert.ToSingle(Configs.timerOffMinutes.Value);
             timerValOffMins = (timerValOffMins / 60) / 24;
-            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerValOffMins);
+            TastyUtilsLogger.LogDebug(timerValOffMins);
 
             timerOffFloatTime = (timerValOffMins + timerValOffHours);
-            NoSmokeStayLit.TastyUtilsLogger.LogDebug(timerOffFloatTime);
+            TastyUtilsLogger.LogDebug(timerOffFloatTime);
         }
     }
 }

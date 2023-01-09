@@ -6,10 +6,21 @@ namespace NoSmokeStayLit.Patches
 {
     internal class KeepFueledPatch
     {
-        //    //This code provided in Fuel Eternal by Markinator  all credit
+        //    //This code provided in Fuel Eternal by Marfinator  all credit
         //  used here with permission.
-     
-   
+
+        [HarmonyPatch]
+        class Fireplace_UpdateFireplace_Patch
+        {
+            [HarmonyPatch(typeof(Fireplace))]
+            [HarmonyPatch("UpdateFireplace")]
+            [HarmonyPrefix]
+            static void Fireplace_UpdateFireplace(Fireplace __instance, ref ZNetView ___m_nview)
+            {
+                if (Configs.ConfigCheck(__instance.name))
+                    ___m_nview.GetZDO().Set("fuel", __instance.m_maxFuel);
+            }
+        }
 
 
         [HarmonyPatch]

@@ -5,11 +5,11 @@ using NoSmokeStayLit;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle(NoSmokeStayLit.NoSmokeStayLit.ModName)]
+[assembly: AssemblyTitle(NoSmokeStayLitMain.ModName)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(NoSmokeStayLit.NoSmokeStayLit.Author)]
-[assembly: AssemblyProduct(NoSmokeStayLit.NoSmokeStayLit.ModName)]
+[assembly: AssemblyCompany(NoSmokeStayLitMain.Author)]
+[assembly: AssemblyProduct(NoSmokeStayLitMain.ModName)]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,5 +32,5 @@ using NoSmokeStayLit;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(NoSmokeStayLit.NoSmokeStayLit.ModVersion)]
-[assembly: AssemblyFileVersion(NoSmokeStayLit.NoSmokeStayLit.ModVersion)]
+[assembly: AssemblyVersion(NoSmokeStayLitMain.ModVersion)]
+[assembly: AssemblyFileVersion(NoSmokeStayLitMain.ModVersion)]

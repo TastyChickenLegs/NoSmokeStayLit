@@ -18,7 +18,7 @@ namespace NoSmokeStayLit.Patches
                         //checks to see if stack smelters is true and kills off the smoke blocked check
 
                         __instance.m_smokeSpawner.enabled = true;
-                        __instance.m_blockedSmoke = true;
+                        //__instance.m_blockedSmoke = true;
                         return;
                     }
                 }

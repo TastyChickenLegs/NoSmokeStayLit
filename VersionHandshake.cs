@@ -10,18 +10,18 @@ namespace NoSmokeStayLit
     {
         private static void Prefix(ZNetPeer peer, ref ZNet __instance)
         {
-            if (NoSmokeStayLit.configVerifyClient)
+            if (NoSmokeStayLitMain.configVerifyClient)
             // Register version check call
             {
-                NoSmokeStayLit.TastyUtilsLogger.LogDebug("Registering version RPC handler");
-                peer.m_rpc.Register($"{NoSmokeStayLit.ModName}_VersionCheck",
+                NoSmokeStayLitMain.TastyUtilsLogger.LogDebug("Registering version RPC handler");
+                peer.m_rpc.Register($"{NoSmokeStayLitMain.ModName}_VersionCheck",
                     new Action<ZRpc, ZPackage>(RpcHandlers.RPC_ServerSyncModTemplate_Version));
 
                 // Make calls to check versions
-                NoSmokeStayLit.TastyUtilsLogger.LogInfo("Invoking version check");
+                NoSmokeStayLitMain.TastyUtilsLogger.LogInfo("Invoking version check");
                 ZPackage zpackage = new();
-                zpackage.Write(NoSmokeStayLit.ModVersion);
-                peer.m_rpc.Invoke($"{NoSmokeStayLit.ModName}_VersionCheck", zpackage);
+                zpackage.Write(NoSmokeStayLitMain.ModVersion);
+                peer.m_rpc.Invoke($"{NoSmokeStayLitMain.ModName}_VersionCheck", zpackage);
             }
         }
     }
@@ -31,11 +31,11 @@ namespace NoSmokeStayLit
     {
         private static bool Prefix(ZRpc rpc, ZPackage pkg, ref ZNet __instance)
         {
-            if (NoSmokeStayLit.configVerifyClient)
+            if (NoSmokeStayLitMain.configVerifyClient)
             {
                 if (!__instance.IsServer() || RpcHandlers.ValidatedPeers.Contains(rpc)) return true;
                 // Disconnect peer if they didn't send mod version at all
-                NoSmokeStayLit.TastyUtilsLogger.LogWarning(
+                NoSmokeStayLitMain.TastyUtilsLogger.LogWarning(
                     $"Peer ({rpc.m_socket.GetHostName()}) never sent version or couldn't due to previous disconnect, disconnecting");
                 rpc.Invoke("Error", 3);
                 return false; // Prevent calling underlying method
@@ -45,7 +45,7 @@ namespace NoSmokeStayLit
 
         private static void Postfix(ZNet __instance)
         {
-            if (NoSmokeStayLit.configVerifyClient)
+            if (NoSmokeStayLitMain.configVerifyClient)
             {
                 ZRoutedRpc.instance.InvokeRoutedRPC(ZRoutedRpc.instance.GetServerPeerID(), "RequestAdminSync",
                 new ZPackage());
@@ -59,13 +59,13 @@ namespace NoSmokeStayLit
         private static void Postfix(FejdStartup __instance)
 
         {
-            if (NoSmokeStayLit.configVerifyClient)
+            if (NoSmokeStayLitMain.configVerifyClient)
             {
                 if (__instance.m_connectionFailedPanel.activeSelf)
                 {
                     __instance.m_connectionFailedError.resizeTextMaxSize = 25;
                     __instance.m_connectionFailedError.resizeTextMinSize = 15;
-                    __instance.m_connectionFailedError.text += "\n" + NoSmokeStayLit.ConnectionError;
+                    __instance.m_connectionFailedError.text += "\n" + NoSmokeStayLitMain.ConnectionError;
                 }
             }
         }
@@ -77,11 +77,11 @@ namespace NoSmokeStayLit
         private static void Prefix(ZNetPeer peer, ref ZNet __instance)
 
         {
-            if (NoSmokeStayLit.configVerifyClient)
+            if (NoSmokeStayLitMain.configVerifyClient)
             {
                 if (!__instance.IsServer()) return;
                 // Remove peer from validated list
-                NoSmokeStayLit.TastyUtilsLogger.LogInfo(
+                NoSmokeStayLitMain.TastyUtilsLogger.LogInfo(
                     $"Peer ({peer.m_rpc.m_socket.GetHostName()}) disconnected, removing from validated list");
                 _ = RpcHandlers.ValidatedPeers.Remove(peer.m_rpc);
             }
@@ -94,19 +94,19 @@ namespace NoSmokeStayLit
 
         public static void RPC_ServerSyncModTemplate_Version(ZRpc rpc, ZPackage pkg)
         {
-            if (NoSmokeStayLit.configVerifyClient)
+            if (NoSmokeStayLitMain.configVerifyClient)
             {
                 string? version = pkg.ReadString();
-                NoSmokeStayLit.TastyUtilsLogger.LogInfo("Version check, local: " +
-                                                                                NoSmokeStayLit.ModVersion +
+                NoSmokeStayLitMain.TastyUtilsLogger.LogInfo("Version check, local: " +
+                                                                                NoSmokeStayLitMain.ModVersion +
                                                                                 ",  remote: " + version);
-                if (version != NoSmokeStayLit.ModVersion)
+                if (version != NoSmokeStayLitMain.ModVersion)
                 {
-                    NoSmokeStayLit.ConnectionError =
-                        $"{NoSmokeStayLit.ModName} Installed: {NoSmokeStayLit.ModVersion}\n Needed: {version}";
+                    NoSmokeStayLitMain.ConnectionError =
+                        $"{NoSmokeStayLitMain.ModName} Installed: {NoSmokeStayLitMain.ModVersion}\n Needed: {version}";
                     if (!ZNet.instance.IsServer()) return;
                     // Different versions - force disconnect client from server
-                    NoSmokeStayLit.TastyUtilsLogger.LogWarning(
+                    NoSmokeStayLitMain.TastyUtilsLogger.LogWarning(
                         $"Peer ({rpc.m_socket.GetHostName()}) has incompatible version, disconnecting");
                     rpc.Invoke("Error", 3);
                 }
@@ -115,13 +115,13 @@ namespace NoSmokeStayLit
                     if (!ZNet.instance.IsServer())
                     {
                         // Enable mod on client if versions match
-                        NoSmokeStayLit.TastyUtilsLogger.LogInfo(
+                        NoSmokeStayLitMain.TastyUtilsLogger.LogInfo(
                             "Received same version from server!");
                     }
                     else
                     {
                         // Add client to validated list
-                        NoSmokeStayLit.TastyUtilsLogger.LogInfo(
+                        NoSmokeStayLitMain.TastyUtilsLogger.LogInfo(
                             $"Adding peer ({rpc.m_socket.GetHostName()}) to validated list");
                         ValidatedPeers.Add(rpc);
                     }

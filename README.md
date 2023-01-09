@@ -99,6 +99,12 @@ Extract DLL from zip file into "<GameDirectory>\Bepinex\plugins"
 Start the game.
 
 ### Version Information
+2.2.0 Release
+
+- Fixed bug with smelter not working when turning on smoke
+- Added a fuel check so mods that automatically add fuel don't add 
+fuel to torches/firepits/hearths that are set for eternal fuel.
+
 2.1.0 Release
 
 - Added the ability to turn back on the smoke for some items.

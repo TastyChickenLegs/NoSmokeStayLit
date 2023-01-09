@@ -31,12 +31,12 @@ namespace NoSmokeStayLit.Patches
                 //NoSmokeStayLit.TastyUtilsLogger.LogInfo(Configs.ConfigCheckTimerOne(__instance.name));
                 EnvSetup currentEnvironment = EnvMan.instance.GetCurrentEnvironment();
                 bool isAlwaysDarkBiome = currentEnvironment != null && currentEnvironment.m_alwaysDark;
-                if (NoSmokeStayLit.timerOffFloatTime > NoSmokeStayLit.timerOnFloatTime)
+                if (NoSmokeStayLitMain.timerOffFloatTime > NoSmokeStayLitMain.timerOnFloatTime)
                 {
                     //NoSmokeStayLit.TastyUtilsLogger.LogInfo(NoSmokeStayLit.timerOffFloatTime);
                     //NoSmokeStayLit.TastyUtilsLogger.LogInfo(NoSmokeStayLit.timerOnFloatTime);
                     //
-                    if ((dayFraction <= NoSmokeStayLit.timerOnFloatTime && dayFraction >= 1f) || dayFraction >= NoSmokeStayLit.timerOffFloatTime)
+                    if ((dayFraction <= NoSmokeStayLitMain.timerOnFloatTime && dayFraction >= 1f) || dayFraction >= NoSmokeStayLitMain.timerOffFloatTime)
                     {
 
                         if (!shouldBeLit || (isAlwaysDarkBiome && Configs.configAlwaysOnInDarkBiomes.Value))
@@ -48,7 +48,7 @@ namespace NoSmokeStayLit.Patches
                         __result = false;
                     }
                 }
-                else if (dayFraction <= NoSmokeStayLit.timerOnFloatTime && dayFraction >= NoSmokeStayLit.timerOffFloatTime)
+                else if (dayFraction <= NoSmokeStayLitMain.timerOnFloatTime && dayFraction >= NoSmokeStayLitMain.timerOffFloatTime)
                 {
                     //NoSmokeStayLit.TastyUtilsLogger.LogInfo(dayFraction);
                     

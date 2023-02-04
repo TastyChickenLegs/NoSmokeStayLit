@@ -1,0 +1,9 @@
+{
+  "name": "NoSmokeStayLit",
+  "description": "Updated with new features and bugfixes.  Now works with Oven smoke. Takes away smoke and keeps everything lit.  Torches, Ovens, Hottubs, Smelters and adds Timed Torches",
+  "version_number": "2.2.4",
+  "website_url": "https://github.com/tastychickenlegs",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.1900"
+  ]
+}

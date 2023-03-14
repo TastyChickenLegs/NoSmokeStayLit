@@ -14,7 +14,7 @@ namespace NoSmokeStayLit
     public class NoSmokeStayLitPlugin : BaseUnityPlugin
     {
         internal const string ModName = "NoSmokeStayLit";
-        internal const string ModVersion = "2.2.5";
+        internal const string ModVersion = "2.2.6";
         internal const string Author = "TastyChickenLegs";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";

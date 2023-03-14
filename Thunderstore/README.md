@@ -102,6 +102,14 @@ Start the game.
 
 ### Version Information
 
+2.2.6
+
+- updated to newest Valheim patch
+
+2.2.5
+
+no changes version bumped to match Thunderstore.
+
 2.2.4
 
 - Final fix for ovens.  Smoke can now be turned off.

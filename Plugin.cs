@@ -14,17 +14,16 @@ namespace NoSmokeStayLit
     public class NoSmokeStayLitPlugin : BaseUnityPlugin
     {
         internal const string ModName = "NoSmokeStayLit";
-        internal const string ModVersion = "2.2.6";
+        internal const string ModVersion = "2.3.7";
         internal const string Author = "TastyChickenLegs";
         private const string ModGUID = Author + "." + ModName;
         private static string ConfigFileName = ModGUID + ".cfg";
         private static string ConfigFileFullPath = Paths.ConfigPath + Path.DirectorySeparatorChar + ConfigFileName;
-        public static bool configVerifyClient => _configVerifyClient.Value;
+
         
         public static NoSmokeStayLitPlugin context;
         private static ConfigEntry<Toggle> _serverConfigLocked = null!;
         private static ConfigEntry<bool> _configEnabled;
-        private static ConfigEntry<bool> _configVerifyClient;
         public static readonly ManualLogSource TastyUtilsLogger =
             BepInEx.Logging.Logger.CreateLogSource(ModName);
         public static float timerOnFloatTime;
@@ -51,7 +50,6 @@ namespace NoSmokeStayLit
             _serverConfigLocked = config("1 - General", "Lock Configuration", Toggle.On,
                 "If on, the configuration is locked and can be changed by server admins only.");
             _ = ConfigSync.AddLockingConfigEntry(_serverConfigLocked);
-            _configVerifyClient = config("Basic Settings", "Verify Clients", true, "Enable this to turn on the client verification and version checks.");
             _configEnabled = config("Basic Settings", "Mod Enabled", true, "Sets the mod to be enabled or not.");
 
             if (!_configEnabled.Value)
@@ -145,26 +143,26 @@ namespace NoSmokeStayLit
         }
 
         #endregion
-        [HarmonyPatch(typeof(Terminal), "InputText")]
-        private static class InputText_Patch
-        {
-            private static bool Prefix(Terminal __instance)
-            {
-                if (!_configEnabled.Value)
-                    return true;
-                string text = __instance.m_input.text;
-                if (text.ToLower().Equals($"{typeof(NoSmokeStayLitPlugin).Namespace.ToLower()} reset"))
-                {
-                    context.Config.Reload();
-                    context.Config.Save();
+        //[HarmonyPatch(typeof(Terminal), "InputText")]
+        //private static class InputText_Patch
+        //{
+        //    private static bool Prefix(Terminal __instance)
+        //    {
+        //        if (!_configEnabled.Value)
+        //            return true;
+        //        string text = __instance.m_input.text;
+        //        if (text.ToLower().Equals($"{typeof(NoSmokeStayLitPlugin).Namespace.ToLower()} reset"))
+        //        {
+        //            context.Config.Reload();
+        //            context.Config.Save();
 
-                    __instance.AddString(text);
-                    __instance.AddString($"{context.Info.Metadata.Name} config reloaded");
-                    return false;
-                }
-                return true;
-            }
-        }
+        //            __instance.AddString(text);
+        //            __instance.AddString($"{context.Info.Metadata.Name} config reloaded");
+        //            return false;
+        //        }
+        //        return true;
+        //    }
+        //}
         private static void GogetTime()
         {
             float timerValOnHours = Convert.ToSingle(Configs.timerOnHours.Value);

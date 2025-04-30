@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Reflection;
 using UnityEngine;
 
@@ -7,6 +8,28 @@ using UnityEngine;
 
 namespace NoSmokeStayLit.Patches
 {
+
+    //[HarmonyPatch(typeof(Cinder), nameof(Cinder.FixedUpdate))]
+
+    //internal class CinderIsBurning_Patch
+    //{
+    //    private static void Postfix(Cinder __instance, ref bool __result,
+    //             ref GameObject ___m_enabledObjectHigh, ref ZNetView ___m_nview)
+    //    {
+           
+            
+            
+    //        if (__instance.name.StartsWith("cinder_campfire"))
+    //            Utils.FindChild(__instance.transform, "SmokeSpawner").gameObject.
+    //                                GetComponent<SmokeSpawner>().enabled = false;
+    //    }
+
+
+
+    //        }
+
+
+
     [HarmonyPatch(typeof(Fireplace), nameof(Fireplace.IsBurning))]
     internal class FireplaceIsBurning_Patch
     {
@@ -65,6 +88,11 @@ namespace NoSmokeStayLit.Patches
 
 
             }
+            //if (__instance.name.StartsWith("cinder_campfire"))
+            //    Utils.FindChild(__instance.transform, "SmokeSpawner").gameObject.
+            //                        GetComponent<SmokeSpawner>().enabled = false;
+
+
 
             if (Configs.ConfigCheckGiveMeSmoke(__instance.name))
             {
@@ -74,7 +102,10 @@ namespace NoSmokeStayLit.Patches
                     Utils.FindChild(__instance.transform, "SmokeSpawner").gameObject.
                                         GetComponent<SmokeSpawner>().enabled = true;
                 if (Configs.keepOnInRain.Value) __instance.m_wet = false;
-                return;
+                
+                
+                
+            return;
             }
             else
             {

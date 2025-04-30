@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ namespace NoSmokeStayLit.Patches
             [HarmonyPrefix]
             static void Fireplace_UpdateFireplace(Fireplace __instance, ref ZNetView ___m_nview)
             {
+
+
                 if (Configs.ConfigCheck(__instance.name))
                     ___m_nview.GetZDO().Set("fuel", __instance.m_maxFuel);
             }
@@ -31,7 +34,7 @@ namespace NoSmokeStayLit.Patches
             [HarmonyPrefix]
             private static void CookingStation_SetFuel(CookingStation __instance, ref float fuel)
             {
-                if (Configs.ConfigCheck(__instance.name))
+                    if (Configs.ConfigCheck(__instance.name))
                     fuel = __instance.m_maxFuel;
                 //NoSmokeStayLit.TastyUtilsLogger.LogInfo(fuel);
             }
@@ -87,7 +90,7 @@ namespace NoSmokeStayLit.Patches
         public static async void Refuel(ZNetView znview)
         {
             await Task.Delay(33);
-            znview.InvokeRPC("AddFuel");
+            znview.InvokeRPC("RPC_AddFuel");
         }
 }
 }

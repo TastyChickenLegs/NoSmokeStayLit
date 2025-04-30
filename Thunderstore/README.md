@@ -16,7 +16,7 @@ and creates a super simple config that allows anyone to have the features they n
 - New sliders for Torch Timers.  Select your hour and min... I do all the math automatically.
 
 Bug reports should go on this site or my [Github.](https://github.com/TastyChickenLegs/NoSmokeStayLit)  
-[Chat with me on Discord](https://discord.com/users/TastyChickenLegs#4818)
+[Chat with me on Discord](https://discord.gg/PQMXbUS6FH)
 
 ### About the Mod:
 I had issues keeping several mods updated with overlapping features.  I combined them into this one and
@@ -101,6 +101,58 @@ Extract DLL from zip file into "<GameDirectory>\Bepinex\plugins"
 Start the game.
 
 ### Version Information
+2.3.7
+
+- removed the code that altered the HUD when not needing fuel.  It was breaking other mods.
+
+2.3.6
+
+- Updated to fix multiplayer bug.  Game files updated to newest version
+
+2.3.5
+
+- fixed braziers that were broken.
+
+2.3.4
+
+- updated for Witch's Bog
+
+2.3.3
+
+- Fixed problem with ovens and other items causing RPC errors.
+
+
+
+2.3.2
+
+- Update for Ashlands
+
+
+2.3.1
+
+- updated for Valheim 0.217.28 - Fix for scrolling error
+
+2.3.0
+
+- updated for Valheim 0.271.22
+
+
+
+2.2.9
+
+- cleaned up some wording in the gui when hovering over a torch with "stay lit" feature turned on.
+
+
+2.2.8
+
+- Updated for Hildir's Request
+
+
+
+2.2.7
+
+- updated to newest patch of valheim 0.214.300
+
 
 2.2.6
 

@@ -1,8 +1,8 @@
 {
   "name": "NoSmokeStayLit",
-  "description": "Fixed Braziers.  Now works with Oven smoke. Takes away smoke and keeps everything lit.  Torches, Ovens, Hottubs, Smelters and adds Timed Torches",
-  "version_number": "2.3.7",
-  "website_url": "https://discord.gg/z5NrSZqP",
+  "description": "Now works with Oven smoke. Takes away smoke and keeps everything lit.  Torches, Ovens, Hottubs, Smelters and adds Timed Torches",
+  "version_number": "2.3.9",
+  "website_url": "https://discord.gg/crpjbzKgQx",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2101"
   ]

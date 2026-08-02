@@ -101,6 +101,17 @@ Extract DLL from zip file into "<GameDirectory>\Bepinex\plugins"
 Start the game.
 
 ### Version Information
+
+2.3.9
+
+- updated to newest Valheim patch
+
+
+2.3.8
+
+- fixed ability to add smoke to the bonfire
+
+
 2.3.7
 
 - removed the code that altered the HUD when not needing fuel.  It was breaking other mods.

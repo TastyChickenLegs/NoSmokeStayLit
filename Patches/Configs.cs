@@ -53,7 +53,7 @@ internal class Configs
     private static ConfigEntry<bool> fe_piece_brazierceiling01_smoke;
     private static ConfigEntry<bool> fe_smelter_smoke;
     internal static ConfigEntry<bool> fe_oven;
-
+    private static ConfigEntry<bool> fe_bonfire_smoke;
 
     //public static float lastFuel;
     //public static int fuelCount;
@@ -113,6 +113,7 @@ internal class Configs
         fe_piece_brazierceiling01_smoke = NoSmokeStayLitPlugin.context.config("Really, I Want Smoke", "Ceiling Brazier Enable Smoke", false, "Enable timer for Hanging brazier");
         fe_smelter_smoke = NoSmokeStayLitPlugin.context.config("Really, I Want Smoke", "Smelter Enable Smoke", false, "Enable Smoke for Smelter.  This disables Smelter Stacking");
         fe_oven = NoSmokeStayLitPlugin.context.config<bool>("Really, I Want Smoke", "Oven Enable Smoke", false, "Enable Smoke for Cooking Station.");
+        fe_bonfire_smoke = NoSmokeStayLitPlugin.context.config<bool>("Really, I Want Smoke", "Bonfire Enable Smoke", false, "Enable Smoke for Bonfire.");
 
         configAlwaysOnInDarkBiomes = NoSmokeStayLitPlugin.context.config("Basic Settings", "Always On In Dark Biomes", true, 
             "If true, torches will always burn in areas that Valheim considers 'always dark'." +
@@ -262,6 +263,10 @@ internal class Configs
 
             case "piece_oven(Clone)":
                 GiveMeSmoke = fe_oven.Value;
+                break;
+
+            case "bonfire(Clone)":
+                GiveMeSmoke = fe_bonfire_smoke.Value;
                 break;
 
         }
